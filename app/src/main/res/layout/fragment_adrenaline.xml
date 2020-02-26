@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/image_btn_location_access"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="370dp"
+            android:contentDescription="@string/image_btn_location_access"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/btn_location_access" />
+
+        <ImageView
+            android:id="@+id/image_btn_health_access_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image_btn_health_access_bg"
+            app:layout_constraintBottom_toTopOf="@+id/image_btn_location_access"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/btn_health_access_bg" />
+
+        <ImageView
+            android:id="@+id/image_btn_health_access_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="26dp"
+            android:contentDescription="@string/image_btn_health_access_text"
+            app:layout_constraintBottom_toBottomOf="@+id/image_btn_health_access_bg"
+            app:layout_constraintEnd_toEndOf="@+id/image_btn_health_access_bg"
+            app:layout_constraintStart_toStartOf="@+id/image_btn_health_access_bg"
+            app:layout_constraintTop_toTopOf="@+id/image_btn_health_access_bg"
+            app:srcCompat="@drawable/btn_health_access_text" />
+
+        <ImageView
+            android:id="@+id/image_text_adrenaline_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:contentDescription="@string/image_text_adrenaline_mode"
+            app:layout_constraintBottom_toTopOf="@+id/image_btn_location_access"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/text_adrenaline_mode" />
+
+        <ImageView
+            android:id="@+id/image_text_adrenaline_explained"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/image_text_adrenaline_explained"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_text_adrenaline_mode"
+            app:srcCompat="@drawable/text_adrenaline_explained" />
+
+        <ImageView
+            android:id="@+id/image_icon_adrenaline_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:contentDescription="@string/image_icon_adrenaline_mode"
+            app:layout_constraintBottom_toTopOf="@+id/image_text_adrenaline_mode"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/icon_adrenaline_mode" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/image_btn_continue_recovery_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="370dp"
+            android:contentDescription="@string/image_btn_recovery_mode_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/btn_continue_recovery_bg" />
+
+        <ImageView
+            android:id="@+id/image_btn_continue_recovery_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="26dp"
+            android:contentDescription="@string/image_btn_recovery_mode_text"
+            app:layout_constraintBottom_toBottomOf="@+id/image_btn_continue_recovery_bg"
+            app:layout_constraintEnd_toEndOf="@+id/image_btn_continue_recovery_bg"
+            app:layout_constraintStart_toStartOf="@+id/image_btn_continue_recovery_bg"
+            app:layout_constraintTop_toTopOf="@+id/image_btn_continue_recovery_bg"
+            app:srcCompat="@drawable/btn_continue_recovery_text" />
+
+        <ImageView
+            android:id="@+id/image_text_recovery_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:contentDescription="@string/image_text_recovery_mode"
+            app:layout_constraintBottom_toTopOf="@+id/image_btn_continue_recovery_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/text_recovery_mode" />
+
+        <ImageView
+            android:id="@+id/image_text_recovery_explained"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/image_text_recovery_explained"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_text_recovery_mode"
+            app:srcCompat="@drawable/text_recovery_explained" />
+
+        <ImageView
+            android:id="@+id/image_icon_recovery_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:contentDescription="@string/image_icon_recovery_mode"
+            app:layout_constraintBottom_toTopOf="@+id/image_text_recovery_mode"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/icon_recovery_mode" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

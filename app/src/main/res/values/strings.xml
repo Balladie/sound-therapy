@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Sound Therapy</string>
+    <string name="image_background_default">background_default.png</string>
+    <string name="image_app_title">app_title.png</string>
+    <string name="image_app_icon">app_icon.png</string>
+    <string name="image_app_description">app_description.png</string>
+    <string name="image_btn_continue_white_bg">btn_continue_white_bg.png</string>
+    <string name="image_btn_continue_white_text">btn_continue_white_text.png</string>
+    <string name="image_text_welcome_to">text_welcome_to.png</string>
+    <string name="image_btn_location_access">btn_location_access.png</string>
+    <string name="image_btn_health_access_bg">btn_health_access_bg.png</string>
+    <string name="image_btn_health_access_text">btn_health_access_text.png</string>
+    <string name="image_text_adrenaline_mode">text_adrenaline_mode.png</string>
+    <string name="image_text_adrenaline_explained">text_adrenaline_explained.png</string>
+    <string name="image_icon_adrenaline_mode">icon_adrenaline_mode.png</string>
+    <string name="image_btn_healing_mode">btn_healing_mode.png</string>
+    <string name="image_text_healing_mode">text_healing_mode.png</string>
+    <string name="image_text_healing_explained">text_healing_explained.png</string>
+    <string name="image_icon_healing_mode">icon_healing_mode.png</string>
+    <string name="image_btn_deepsleep_mode">btn_deepsleep_mode.png</string>
+    <string name="image_text_deepsleep_mode">text_deepsleep_mode.png</string>
+    <string name="image_text_deepsleep_explained">text_deepsleep_explained.png</string>
+    <string name="image_icon_deepsleep_mode">icon_deepsleep_mode.png</string>
+    <string name="image_btn_focus_mode_bg">btn_focus_mode_bg.png</string>
+    <string name="image_btn_focus_mode_text">btn_focus_mode_text.png</string>
+    <string name="image_text_focus_mode">text_focus_mode.png</string>
+    <string name="image_text_focus_explained">text_focus_explained.png</string>
+    <string name="image_icon_focus_mode">icon_focus_mode.png</string>
+    <string name="image_btn_recovery_mode_bg">btn_recovery_mode_bg.png</string>
+    <string name="image_btn_recovery_mode_text">btn_recovery_mode_text.png</string>
+    <string name="image_text_recovery_mode">text_recovery_mode.png</string>
+    <string name="image_text_recovery_explained">text_recovery_explained.png</string>
+    <string name="image_icon_recovery_mode">icon_recovery_mode.png</string>
+</resources>

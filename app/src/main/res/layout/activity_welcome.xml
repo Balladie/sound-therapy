@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/layout_splash" >
+
+        <ImageView
+            android:id="@+id/image_background_welcome"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/image_background_default"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/background_default" />
+
+        <ImageView
+            android:id="@+id/image_app_title_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34dp"
+            android:layout_marginBottom="37dp"
+            android:contentDescription="@string/image_app_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/app_title" />
+
+        <ImageView
+            android:id="@+id/image_app_icon_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="135dp"
+            android:layout_marginLeft="135dp"
+            android:layout_marginEnd="135dp"
+            android:layout_marginRight="135dp"
+            android:layout_marginBottom="21dp"
+            android:contentDescription="@string/image_app_icon"
+            app:layout_constraintBottom_toTopOf="@+id/image_app_title_welcome"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/app_icon" />
+
+        <ImageView
+            android:id="@+id/image_app_description_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginRight="50dp"
+            android:contentDescription="@string/image_app_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_app_title_welcome"
+            app:srcCompat="@drawable/app_description" />
+
+        <ImageView
+            android:id="@+id/image_btn_continue_bg_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="370dp"
+            android:contentDescription="@string/image_btn_continue_white_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/btn_continue_white_bg"
+            tools:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/image_btn_continue_text_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="26dp"
+            android:contentDescription="@string/image_btn_continue_white_text"
+            app:layout_constraintBottom_toBottomOf="@+id/image_btn_continue_bg_welcome"
+            app:layout_constraintEnd_toEndOf="@+id/image_btn_continue_bg_welcome"
+            app:layout_constraintStart_toStartOf="@+id/image_btn_continue_bg_welcome"
+            app:layout_constraintTop_toTopOf="@+id/image_btn_continue_bg_welcome"
+            app:srcCompat="@drawable/btn_continue_white_text"
+            tools:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/image_text_welcome_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="34dp"
+            android:contentDescription="@string/image_text_welcome_to"
+            app:layout_constraintBottom_toTopOf="@+id/image_app_icon_welcome"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/text_welcome_to"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
