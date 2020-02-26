@@ -30,12 +30,15 @@ class SplashActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setWindowFullScreen(window, actionBar)
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_welcome)
 
         setWelcomeInvisible()
         setAnimation()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setWindowFullScreen(window, actionBar)
     }
 
     private fun setAnimation() {
@@ -43,13 +46,11 @@ class SplashActivity : BaseActivity() {
             duration = 2000
             setAnimationListener(object: Animation.AnimationListener {
                 override fun onAnimationRepeat(p0: Animation) {}
-
                 override fun onAnimationEnd(p0: Animation) {
                     Timer().schedule(1500) {
                         moveToNext()
                     }
                 }
-
                 override fun onAnimationStart(p0: Animation) {}
             })
         })

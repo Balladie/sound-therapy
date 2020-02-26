@@ -31,4 +31,24 @@
     <string name="image_text_recovery_mode">text_recovery_mode.png</string>
     <string name="image_text_recovery_explained">text_recovery_explained.png</string>
     <string name="image_icon_recovery_mode">icon_recovery_mode.png</string>
+    <string name="text_title_adrenaline">Adrenaline Mode</string>
+    <string name="text_title_healing">Refresh Air</string>
+    <string name="text_title_deepsleep">New Ambient</string>
+    <string name="text_title_focus">Deep Focus</string>
+    <string name="text_title_recovery">Recovery</string>
+    <string name="image_icon_adrenaline_unselected">icon_adrenaline_unselected.png</string>
+    <string name="image_icon_healing_unselected">icon_healing_unselected.png</string>
+    <string name="image_icon_deepsleep_unselected">icon_deepsleep_unselected.png</string>
+    <string name="image_icon_focus_unselected">icon_focus_unselected.png</string>
+    <string name="image_icon_recovery_unselected">icon_recovery_unselected.png</string>
+    <string name="image_icon_pause">icon_pause.png</string>
+    <string name="image_icon_music">icon_music.png</string>
+    <string name="image_icon_alarm_bg">icon_alarm_bg.png</string>
+    <string name="image_icon_alarm_image">icon_alarm_image.png</string>
+    <string name="image_icon_settings">icon_settings.png</string>
+    <string name="image_icon_adrenaline_selected">icon_adrenaline_selected.png</string>
+    <string name="image_icon_healing_selected">icon_healing_selected.png</string>
+    <string name="image_icon_deepsleep_selected">icon_deepsleep_selected.png</string>
+    <string name="image_icon_focus_selected">icon_focus_selected.png</string>
+    <string name="image_icon_recovery_selected">icon_recovery_selected.png</string>
 </resources>

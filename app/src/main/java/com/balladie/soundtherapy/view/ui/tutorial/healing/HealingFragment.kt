@@ -30,7 +30,7 @@ class HealingFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val context = context ?: return
+        //val context = context ?: return
 
         setupViews()
     }

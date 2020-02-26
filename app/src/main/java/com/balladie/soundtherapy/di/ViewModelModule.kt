@@ -2,6 +2,7 @@ package com.balladie.soundtherapy.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.balladie.soundtherapy.view.ui.main.MainViewModel
 import com.balladie.soundtherapy.view.ui.splash.SplashViewModel
 import com.balladie.soundtherapy.view.ui.tutorial.TutorialViewModel
 import dagger.Binds
@@ -16,6 +17,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SplashViewModel::class)
     abstract fun splash(splashViewModel: SplashViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainViewModel::class)
+    abstract fun main(mainViewModel: MainViewModel): ViewModel
 
     @Binds
     @IntoMap

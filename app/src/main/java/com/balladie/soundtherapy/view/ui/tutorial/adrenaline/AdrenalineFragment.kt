@@ -7,6 +7,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.balladie.soundtherapy.R
@@ -14,16 +17,15 @@ import com.balladie.soundtherapy.databinding.FragmentAdrenalineBinding
 import com.balladie.soundtherapy.view.setThrottledOnClickListener
 import com.balladie.soundtherapy.view.ui.base.BaseFragment
 import com.balladie.soundtherapy.view.ui.tutorial.TutorialActivity
+import java.util.*
+import kotlin.concurrent.schedule
 
 class AdrenalineFragment : BaseFragment() {
 
-    private lateinit var binding: FragmentAdrenalineBinding
-
-    private var gotHealthAccess: Boolean = false
-    private var gotLocationAccess: Boolean = false
-
     companion object {
         fun create() = AdrenalineFragment()
+
+        lateinit var binding: FragmentAdrenalineBinding
 
         const val MY_PERMISSIONS_REQUEST_LOCATION = 99
     }
@@ -45,15 +47,16 @@ class AdrenalineFragment : BaseFragment() {
     }
 
     private fun setupViews(context: Context) {
-        //binding.imageBtnHealthAccessBg.setThrottledOnClickListener {
-        //}
-        //binding.imageBtnHealthAccessText.setThrottledOnClickListener {
-        //}
+        binding.imageBtnHealthAccessBg.setThrottledOnClickListener {
+            Toast.makeText(context, "btn clicked", Toast.LENGTH_SHORT).show()
+        }
+        binding.imageBtnHealthAccessText.setThrottledOnClickListener {
+            Toast.makeText(context, "btn clicked", Toast.LENGTH_SHORT).show()
+        }
 
         binding.imageBtnLocationAccess.setThrottledOnClickListener {
             checkLocationPermission(context)
         }
-
     }
 
     private fun checkLocationPermission(context: Context): Boolean {
@@ -80,13 +83,23 @@ class AdrenalineFragment : BaseFragment() {
                     // Success! Permission was granted.
                     if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
                         == PackageManager.PERMISSION_GRANTED) {
-                        if (gotHealthAccess || true) {
-                            TutorialActivity.binding.viewPagerTutorial.currentItem++
-                        }
+                        binding.imageBtnLocationAccess.isClickable = false
+                        binding.imageBtnLocationAccess.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out).apply {
+                            duration = 500
+                            setAnimationListener(object: Animation.AnimationListener {
+                                override fun onAnimationRepeat(p0: Animation) {}
+                                override fun onAnimationEnd(p0: Animation) {
+                                    TutorialActivity.gotLocationAccess = true
+                                    if (TutorialActivity.gotHealthAccess && TutorialActivity.gotLocationAccess) {
+                                        TutorialActivity.binding.viewPagerTutorial.currentItem++
+                                    }
+                                }
+                                override fun onAnimationStart(p0: Animation) {}
+                            })
+                        })
                     }
                 }
             }
         }
     }
-
 }

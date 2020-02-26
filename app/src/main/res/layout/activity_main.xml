@@ -1,21 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="view.ui.main.MainActivity">
+        android:background="@color/colorBlack">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="MainActivity"
+        <com.flaviofaria.kenburnsview.KenBurnsView
+            android:id="@+id/bg_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/bg_adrenaline"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_mode_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            app:fontFamily="@font/hind_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/bg_main"
+            tools:text="Mode Title" />
+
+        <ImageView
+            android:id="@+id/image_icon_adrenaline_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="148dp"
+            android:contentDescription="@string/image_icon_adrenaline_selected"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/image_icon_healing_selected"
+            app:srcCompat="@drawable/icon_adrenaline_selected" />
+
+        <ImageView
+            android:id="@+id/image_icon_healing_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="149dp"
+            android:contentDescription="@string/image_icon_healing_selected"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/image_icon_deepsleep_selected"
+            app:srcCompat="@drawable/icon_healing_selected" />
+
+        <ImageView
+            android:id="@+id/image_icon_deepsleep_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="149dp"
+            android:contentDescription="@string/image_icon_deepsleep_selected"
+            app:layout_constraintBottom_toBottomOf="@+id/bg_main"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/icon_deepsleep_selected" />
+
+        <ImageView
+            android:id="@+id/image_icon_focus_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="149dp"
+            android:contentDescription="@string/image_icon_focus_selected"
+            app:layout_constraintBottom_toBottomOf="@+id/bg_main"
+            app:layout_constraintStart_toEndOf="@+id/image_icon_deepsleep_selected"
+            app:srcCompat="@drawable/icon_focus_selected" />
+
+        <ImageView
+            android:id="@+id/image_icon_recovery_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="149dp"
+            android:contentDescription="@string/image_icon_recovery_selected"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/image_icon_focus_selected"
+            app:srcCompat="@drawable/icon_recovery_selected" />
+
+        <ImageView
+            android:id="@+id/image_icon_adrenaline_unselected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="14dp"
+            android:layout_marginRight="14dp"
+            android:layout_marginBottom="180dp"
+            android:contentDescription="@string/image_icon_adrenaline_unselected"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/image_icon_healing_unselected"
+            app:srcCompat="@drawable/icon_adrenaline_unselected" />
+
+        <ImageView
+            android:id="@+id/image_icon_healing_unselected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="14dp"
+            android:layout_marginRight="14dp"
+            android:layout_marginBottom="180dp"
+            android:contentDescription="@string/image_icon_healing_unselected"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/image_icon_deepsleep_unselected"
+            app:srcCompat="@drawable/icon_healing_unselected" />
+
+        <ImageView
+            android:id="@+id/image_icon_deepsleep_unselected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="180dp"
+            android:contentDescription="@string/image_icon_deepsleep_unselected"
+            app:layout_constraintBottom_toBottomOf="@+id/bg_main"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/icon_deepsleep_unselected" />
+
+        <ImageView
+            android:id="@+id/image_icon_focus_unselected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginBottom="180dp"
+            android:contentDescription="@string/image_icon_focus_unselected"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/image_icon_deepsleep_unselected"
+            app:srcCompat="@drawable/icon_focus_unselected" />
+
+        <ImageView
+            android:id="@+id/image_icon_recovery_unselected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginBottom="180dp"
+            android:contentDescription="@string/image_icon_recovery_unselected"
+            app:layout_constraintBottom_toBottomOf="@+id/bg_main"
+            app:layout_constraintStart_toEndOf="@+id/image_icon_focus_unselected"
+            app:srcCompat="@drawable/icon_recovery_unselected" />
+
+        <ImageView
+            android:id="@+id/image_icon_alarm_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:contentDescription="@string/image_icon_alarm_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_icon_deepsleep_unselected"
+            app:srcCompat="@drawable/icon_under_bg" />
+
+        <ImageView
+            android:id="@+id/image_icon_alarm_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image_icon_alarm_image"
+            app:layout_constraintBottom_toBottomOf="@+id/image_icon_alarm_bg"
+            app:layout_constraintEnd_toEndOf="@+id/image_icon_alarm_bg"
+            app:layout_constraintStart_toStartOf="@+id/image_icon_alarm_bg"
+            app:layout_constraintTop_toTopOf="@+id/image_icon_alarm_bg"
+            app:srcCompat="@drawable/icon_alarm_image" />
+
+        <ImageView
+            android:id="@+id/image_icon_pause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginRight="40dp"
+            android:contentDescription="@string/image_icon_pause"
+            app:layout_constraintEnd_toStartOf="@+id/image_icon_alarm_bg"
+            app:layout_constraintTop_toBottomOf="@+id/image_icon_deepsleep_unselected"
+            app:srcCompat="@drawable/icon_pause" />
+
+        <ImageView
+        android:id="@+id/image_icon_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="50dp"
+        android:contentDescription="@string/image_icon_settings"
+        app:layout_constraintStart_toEndOf="@+id/image_icon_alarm_bg"
+        app:layout_constraintTop_toBottomOf="@+id/image_icon_deepsleep_unselected"
+        app:srcCompat="@drawable/icon_settings" />
+
+        <ImageView
+            android:id="@+id/image_icon_music"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginRight="40dp"
+            android:contentDescription="@string/image_icon_music"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/image_icon_alarm_bg"
+            app:layout_constraintTop_toBottomOf="@+id/image_icon_deepsleep_unselected"
+            app:srcCompat="@drawable/icon_music" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

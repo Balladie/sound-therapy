@@ -1,35 +1,23 @@
 package com.balladie.soundtherapy.view.ui.tutorial
 
-import android.Manifest
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.balladie.soundtherapy.R
 import com.balladie.soundtherapy.databinding.ActivityTutorialBinding
-import com.balladie.soundtherapy.view.setThrottledOnClickListener
 import com.balladie.soundtherapy.view.setWindowFullScreen
 import com.balladie.soundtherapy.view.ui.base.BaseActivity
-import com.balladie.soundtherapy.view.ui.main.MainActivity
 import com.balladie.soundtherapy.view.ui.tutorial.adrenaline.AdrenalineFragment
 import com.balladie.soundtherapy.view.ui.tutorial.deepsleep.DeepsleepFragment
 import com.balladie.soundtherapy.view.ui.tutorial.focus.FocusFragment
 import com.balladie.soundtherapy.view.ui.tutorial.healing.HealingFragment
 import com.balladie.soundtherapy.view.ui.tutorial.recovery.RecoveryFragment
 import kotlinx.android.synthetic.main.activity_tutorial.*
-import kotlinx.android.synthetic.main.fragment_adrenaline.*
-import kotlinx.android.synthetic.main.fragment_deepsleep.*
-import kotlinx.android.synthetic.main.fragment_focus.*
-import kotlinx.android.synthetic.main.fragment_healing.*
-import kotlinx.android.synthetic.main.fragment_recovery.*
-import timber.log.Timber
 import javax.inject.Inject
 
 class TutorialActivity : BaseActivity() {
@@ -43,6 +31,10 @@ class TutorialActivity : BaseActivity() {
             Intent(context, TutorialActivity::class.java)
 
         lateinit var binding: ActivityTutorialBinding
+
+        var gotHealthAccess: Boolean = true     // set it false after processing Google Fit API
+        var gotLocationAccess: Boolean = false
+        var finishedTutorial: Boolean = false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,5 +66,13 @@ class TutorialActivity : BaseActivity() {
             }
 
         binding.dotsIndicatorTutorial.setViewPager2(view_pager_tutorial)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        if (finishedTutorial) {
+            viewModel.setLoginOn()
+        }
     }
 }
