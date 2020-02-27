@@ -43,9 +43,10 @@ class MainActivity : BaseActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.lifecycleOwner = this
 
-        playing = viewModel.getSavedPauseInfo()
+        playing = viewModel.getSavedPauseInfo().not()
 
         setupBg()
+        setPlayOrPause()
         initializeMode()
         setupBtnListeners()
     }
@@ -56,10 +57,15 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setupBg() {
-        if (playing.not()) {
-            binding.bgMain.alpha = 0.0f
-        }
         binding.bgMain.setTransitionGenerator(RandomTransitionGenerator(5000, AccelerateDecelerateInterpolator()))
+    }
+
+    private fun setPlayOrPause() {
+        if (playing.not()) {
+            binding.bgMain.alpha = 0.3f
+            binding.imageIconPause.visibility = View.GONE
+            binding.imageIconMusic.visibility = View.VISIBLE
+        }
     }
 
     private fun initializeMode() {
@@ -151,6 +157,7 @@ class MainActivity : BaseActivity() {
             })
             binding.imageIconPause.visibility = View.GONE
             binding.imageIconMusic.visibility = View.VISIBLE
+            playing = playing.not()
         }
 
         binding.imageIconMusic.setThrottledOnClickListener {
@@ -166,6 +173,7 @@ class MainActivity : BaseActivity() {
             })
             binding.imageIconPause.visibility = View.VISIBLE
             binding.imageIconMusic.visibility = View.GONE
+            playing = playing.not()
         }
     }
 
