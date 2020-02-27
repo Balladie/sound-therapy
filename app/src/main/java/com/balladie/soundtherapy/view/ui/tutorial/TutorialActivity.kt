@@ -40,13 +40,17 @@ class TutorialActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setWindowFullScreen(window, actionBar)
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_tutorial)
         binding.lifecycleOwner = this
 
         setupViews()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setWindowFullScreen(window, actionBar)
     }
 
     private fun setupViews() {

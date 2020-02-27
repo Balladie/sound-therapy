@@ -19,7 +19,8 @@ import javax.inject.Singleton
         AppModule::class,
         PreferenceModule::class,
         ViewModelModule::class,
-        TutorialActivityModule::class
+        TutorialActivityModule::class,
+        NetworkModule::class
     ]
 )
 interface AppComponent : AndroidInjector<App> {
@@ -31,6 +32,8 @@ interface AppComponent : AndroidInjector<App> {
         fun application(application: Application): Builder
 
         fun preferenceModule(preferenceModule: PreferenceModule): Builder
+
+        fun networkModule(networkModule: NetworkModule): Builder
 
         fun build(): AppComponent
     }
