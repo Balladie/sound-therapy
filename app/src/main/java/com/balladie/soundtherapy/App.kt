@@ -1,5 +1,7 @@
 package com.balladie.soundtherapy
 
+import android.content.Context
+import androidx.multidex.MultiDex
 import com.balladie.soundtherapy.di.DaggerAppComponent
 import com.balladie.soundtherapy.di.NetworkModule
 import com.balladie.soundtherapy.di.PreferenceModule
@@ -23,5 +25,10 @@ class App : DaggerApplication() {
             Timber.plant(Timber.DebugTree())
             Stetho.initializeWithDefaults(this)
         }
+    }
+
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
     }
 }

@@ -10,7 +10,7 @@ interface SoundLinkService {
     @GET("sound")
     fun getSoundLink(
         @Query("mode") mode: Int,
-        @Query("latitude") latitude: Float,
-        @Query("longitude") longitude: Float
-    ): Single<SoundInfo>
+        @Query("latitude") latitude: Double,
+        @Query("longitude") longitude: Double
+    ): Single<List<SoundInfo>>
 }

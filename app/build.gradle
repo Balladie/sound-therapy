@@ -30,6 +30,7 @@ android {
         applicationId "com.balladie.soundtherapy"
         minSdkVersion 15
         targetSdkVersion 29
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -98,6 +99,7 @@ dependencies {
     // Retrofit & okhttp
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-scalars:$retrofit_version"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
     implementation "com.squareup.okhttp3:okhttp:4.0.1"
 
@@ -108,4 +110,10 @@ dependencies {
     // Stetho
     implementation "com.facebook.stetho:stetho:$stetho_version"
     implementation "com.facebook.stetho:stetho-okhttp3:$stetho_version"
+
+    // GMS Location
+    implementation "com.google.android.gms:play-services-location:$location_version"
+
+    // multidex
+    implementation "androidx.multidex:multidex:$multidex_version"
 }
