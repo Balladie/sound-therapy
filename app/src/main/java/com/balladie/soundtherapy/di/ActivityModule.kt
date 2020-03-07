@@ -3,6 +3,7 @@ package com.balladie.soundtherapy.di
 import com.balladie.soundtherapy.view.ui.main.MainActivity
 import com.balladie.soundtherapy.view.ui.processed.ProcessedActivity
 import com.balladie.soundtherapy.view.ui.splash.SplashActivity
+import com.balladie.soundtherapy.view.ui.timer.TimerActivity
 import com.balladie.soundtherapy.view.ui.tutorial.TutorialActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -22,4 +23,7 @@ abstract class ActivityModule {
 
     @ContributesAndroidInjector
     abstract fun processed(): ProcessedActivity
+
+    @ContributesAndroidInjector
+    abstract fun timer(): TimerActivity
 }

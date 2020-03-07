@@ -55,4 +55,8 @@
     <string name="image_spinner_dots">spinner_dots.png</string>
     <string name="text_finding_the_best">Finding the best</string>
     <string name="text_sounds_for_you">sounds for you...</string>
+    <string name="image_rect_bg_timer">rect_bg_timer.png</string>
+    <string name="image_icon_timer">icon_timer.png</string>
+    <string name="image_text_shout_off_timer">text_shout_off_timer.png</string>
+    <string name="image_text_timer_explained">text_timer_explained.png</string>
 </resources>

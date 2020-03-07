@@ -23,6 +23,7 @@ import com.balladie.soundtherapy.network.model.SoundInfo
 import com.balladie.soundtherapy.view.setThrottledOnClickListener
 import com.balladie.soundtherapy.view.setWindowFullScreen
 import com.balladie.soundtherapy.view.ui.base.BaseActivity
+import com.balladie.soundtherapy.view.ui.timer.TimerActivity
 import com.flaviofaria.kenburnsview.RandomTransitionGenerator
 import timber.log.Timber
 import javax.inject.Inject
@@ -234,6 +235,10 @@ class MainActivity : BaseActivity() {
             binding.imageIconPause.visibility = View.VISIBLE
             binding.imageIconMusic.visibility = View.GONE
             playing = playing.not()
+        }
+
+        binding.imageIconAlarmBg.setThrottledOnClickListener {
+            startActivity(TimerActivity.intent(this))
         }
     }
 

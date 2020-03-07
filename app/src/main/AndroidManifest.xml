@@ -35,6 +35,10 @@
             android:name=".view.ui.processed.ProcessedActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name=".view.ui.timer.TimerActivity"
+            android:screenOrientation="portrait" >
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"
