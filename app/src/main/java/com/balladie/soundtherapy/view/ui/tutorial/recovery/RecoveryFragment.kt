@@ -10,9 +10,8 @@ import com.balladie.soundtherapy.R
 import com.balladie.soundtherapy.databinding.FragmentRecoveryBinding
 import com.balladie.soundtherapy.view.setThrottledOnClickListener
 import com.balladie.soundtherapy.view.ui.base.BaseFragment
-import com.balladie.soundtherapy.view.ui.main.MainActivity
+import com.balladie.soundtherapy.view.ui.processed.ProcessedActivity
 import com.balladie.soundtherapy.view.ui.tutorial.TutorialActivity
-import com.balladie.soundtherapy.view.ui.tutorial.adrenaline.AdrenalineFragment
 
 class RecoveryFragment : BaseFragment() {
 
@@ -42,7 +41,7 @@ class RecoveryFragment : BaseFragment() {
         binding.imageBtnContinueRecoveryBg.setThrottledOnClickListener {
             if (TutorialActivity.gotLocationAccess) {
                 TutorialActivity.finishedTutorial = true
-                startActivity(MainActivity.intent(context))
+                startActivity(ProcessedActivity.intent(context))
                 activity?.finish()
             } else {
                 TutorialActivity.binding.viewPagerTutorial.currentItem = 0
@@ -51,7 +50,7 @@ class RecoveryFragment : BaseFragment() {
         binding.imageBtnContinueRecoveryText.setThrottledOnClickListener {
             if (TutorialActivity.gotHealthAccess && TutorialActivity.gotLocationAccess) {
                 TutorialActivity.finishedTutorial = true
-                startActivity(MainActivity.intent(context))
+                startActivity(ProcessedActivity.intent(context))
                 activity?.finish()
             } else {
                 TutorialActivity.binding.viewPagerTutorial.currentItem = 0

@@ -3,6 +3,7 @@ package com.balladie.soundtherapy.di
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.balladie.soundtherapy.view.ui.main.MainViewModel
+import com.balladie.soundtherapy.view.ui.processed.ProcessedViewModel
 import com.balladie.soundtherapy.view.ui.splash.SplashViewModel
 import com.balladie.soundtherapy.view.ui.tutorial.TutorialViewModel
 import dagger.Binds
@@ -27,6 +28,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(TutorialViewModel::class)
     abstract fun tutorial(tutorialViewModel: TutorialViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProcessedViewModel::class)
+    abstract fun processed(processedViewModel: ProcessedViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

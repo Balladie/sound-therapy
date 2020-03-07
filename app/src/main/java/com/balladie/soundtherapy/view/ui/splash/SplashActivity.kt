@@ -1,7 +1,6 @@
 package com.balladie.soundtherapy.view.ui.splash
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -13,7 +12,7 @@ import com.balladie.soundtherapy.databinding.ActivityWelcomeBinding
 import com.balladie.soundtherapy.view.setThrottledOnClickListener
 import com.balladie.soundtherapy.view.setWindowFullScreen
 import com.balladie.soundtherapy.view.ui.base.BaseActivity
-import com.balladie.soundtherapy.view.ui.main.MainActivity
+import com.balladie.soundtherapy.view.ui.processed.ProcessedActivity
 import com.balladie.soundtherapy.view.ui.tutorial.TutorialActivity
 import java.util.*
 import javax.inject.Inject
@@ -66,7 +65,7 @@ class SplashActivity : BaseActivity() {
                 })
             }).start()
         } else {
-            startActivity(MainActivity.intent(context))
+            startActivity(ProcessedActivity.intent(context))
             finish()
         }
     }

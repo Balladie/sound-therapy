@@ -1,10 +1,8 @@
 package com.balladie.soundtherapy.view.ui.main
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.location.Location
 import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
@@ -21,13 +19,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.balladie.soundtherapy.BuildConfig
 import com.balladie.soundtherapy.R
 import com.balladie.soundtherapy.databinding.ActivityMainBinding
+import com.balladie.soundtherapy.network.model.SoundInfo
 import com.balladie.soundtherapy.view.setThrottledOnClickListener
 import com.balladie.soundtherapy.view.setWindowFullScreen
 import com.balladie.soundtherapy.view.ui.base.BaseActivity
 import com.flaviofaria.kenburnsview.RandomTransitionGenerator
-import com.google.android.gms.location.*
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -38,14 +34,11 @@ class MainActivity : BaseActivity() {
     private val viewModel by viewModels<MainViewModel> { viewModelFactory }
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private lateinit var locationRequest: LocationRequest
-    private lateinit var locationCallback: LocationCallback
-    private var mediaPlayer = MediaPlayer()
+    private val mediaPlayers = arrayListOf(MediaPlayer(), MediaPlayer(), MediaPlayer(), MediaPlayer(), MediaPlayer())
 
     private var currentModeIdx: Int = 0
-    private var currentSoundLink: String? = null
     private var pausedMode: Int = 0
+    private val currentSoundIdx = arrayListOf(0, 0, 0, 0, 0)
 
     companion object {
         fun intent(context: Context): Intent =
@@ -62,14 +55,10 @@ class MainActivity : BaseActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.lifecycleOwner = this
 
-        playing = viewModel.getSavedPauseInfo().not()
-
         setupBg()
         initializeMode()
-
-        initLocationUpdates()
-        startLocationUpdates()
-
+        getLinksFromExtra()
+        initAllMediaPlayers()
         setupBtnListeners()
         setPlayOrPause()
     }
@@ -79,42 +68,42 @@ class MainActivity : BaseActivity() {
         setWindowFullScreen(window, actionBar)
     }
 
-    private fun initLocationUpdates() {
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        locationRequest = LocationRequest().apply {
-            interval = 10000
-            fastestInterval = 10000
-            smallestDisplacement = 170f
-            priority = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
-        }
-        locationCallback = object : LocationCallback() {
-            @SuppressLint("BinaryOperationInTimber")
-            override fun onLocationResult(locationResult: LocationResult?) {
-                locationResult ?: return
-                if (locationResult.locations.isNotEmpty()) {
-                    if (BuildConfig.DEBUG) {
-                        Timber.d("Sending to server: " +
-                                "mode=$currentModeIdx, " +
-                                "latitude=${locationResult.lastLocation.latitude}, " +
-                                "longitude=${locationResult.lastLocation.longitude}")
-                    }
-                    checkNextSound(locationResult.lastLocation)
+    private fun getLinksFromExtra() {
+        if (intent.hasExtra("numAdrenaline")) {
+            for (i in 0 until intent.getIntExtra("numAdrenaline", 0)) {
+                if (intent.hasExtra("adrenaline${i}")) {
+                    viewModel.adrenalineSoundLinks += SoundInfo(intent.getStringExtra("adrenaline${i}")!!, 0)
                 }
             }
         }
-    }
-
-    private fun startLocationUpdates() {
-        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null)
-    }
-
-    private fun stopLocationUpdates() {
-        fusedLocationClient.removeLocationUpdates(locationCallback)
-    }
-
-    private fun instantRestartLocationUpdates() {
-        stopLocationUpdates()
-        startLocationUpdates()
+        if (intent.hasExtra("numHealing")) {
+            for (i in 0 until intent.getIntExtra("numHealing", 0)) {
+                if (intent.hasExtra("healing${i}")) {
+                    viewModel.healingSoundLinks += SoundInfo(intent.getStringExtra("healing${i}")!!, 1)
+                }
+            }
+        }
+        if (intent.hasExtra("numDeepsleep")) {
+            for (i in 0 until intent.getIntExtra("numDeepsleep", 0)) {
+                if (intent.hasExtra("deepsleep${i}")) {
+                    viewModel.deepsleepSoundLinks += SoundInfo(intent.getStringExtra("deepsleep${i}")!!, 2)
+                }
+            }
+        }
+        if (intent.hasExtra("numFocus")) {
+            for (i in 0 until intent.getIntExtra("numFocus", 0)) {
+                if (intent.hasExtra("focus${i}")) {
+                    viewModel.focusSoundLinks += SoundInfo(intent.getStringExtra("focus${i}")!!, 3)
+                }
+            }
+        }
+        if (intent.hasExtra("numRecovery")) {
+            for (i in 0 until intent.getIntExtra("numRecovery", 0)) {
+                if (intent.hasExtra("recovery${i}")) {
+                    viewModel.recoverySoundLinks += SoundInfo(intent.getStringExtra("recovery${i}")!!, 4)
+                }
+            }
+        }
     }
 
     private fun setupBg() {
@@ -122,10 +111,14 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setPlayOrPause() {
+        playing = viewModel.getSavedPauseInfo().not()
+
         if (playing.not()) {
             binding.bgMain.alpha = 0.3f
             binding.imageIconPause.visibility = View.GONE
             binding.imageIconMusic.visibility = View.VISIBLE
+        } else {
+            startPlayingSound(currentModeIdx)
         }
     }
 
@@ -205,15 +198,14 @@ class MainActivity : BaseActivity() {
         binding.imageIconPause.setThrottledOnClickListener {
             binding.bgMain.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_out_bg).apply {
                 duration = 500
+                fillAfter = true
                 setAnimationListener(object: Animation.AnimationListener {
                     override fun onAnimationRepeat(p0: Animation) {}
                     override fun onAnimationEnd(p0: Animation) {
-                        binding.bgMain.alpha = 0.3f
                     }
                     override fun onAnimationStart(p0: Animation) {
                         pausedMode = currentModeIdx
-                        pausePlayingSound()
-                        binding.bgMain.alpha = 1.0f
+                        pausePlayingSound(currentModeIdx)
                     }
                 })
             })
@@ -225,17 +217,17 @@ class MainActivity : BaseActivity() {
         binding.imageIconMusic.setThrottledOnClickListener {
             binding.bgMain.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in_bg).apply {
                 duration = 500
+                fillAfter = true
                 setAnimationListener(object: Animation.AnimationListener {
                     override fun onAnimationRepeat(p0: Animation) {}
                     override fun onAnimationEnd(p0: Animation) {}
                     override fun onAnimationStart(p0: Animation) {
                         if (pausedMode == currentModeIdx) {
-                            resumePlayingSound()
+                            resumePlayingSound(currentModeIdx)
                         }
                         else {
-                            startPlayingSound()
+                            startPlayingSound(currentModeIdx)
                         }
-                        binding.bgMain.alpha = 1.0f
                     }
                 })
             })
@@ -248,7 +240,7 @@ class MainActivity : BaseActivity() {
     private fun setCurrentMode(idx: Int) {
         val pastModeIdx = currentModeIdx
         currentModeIdx = idx
-        mediaPlayer.stop()
+        stopPlayingSound(pastModeIdx)
 
         val arrTitle = arrayOf(
             getString(R.string.text_title_adrenaline),
@@ -295,66 +287,78 @@ class MainActivity : BaseActivity() {
         arrUnselected[pastModeIdx].visibility = View.VISIBLE
         arrUnselected[currentModeIdx].visibility = View.INVISIBLE
 
-        instantRestartLocationUpdates()
+        if (playing) {
+            startPlayingSound(currentModeIdx)
+        }
     }
 
-    private fun checkNextSound(location: Location) {
-        viewModel.getSoundLink(currentModeIdx, location)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                if (it[0].mode != currentModeIdx) return@subscribe
-                if (it[0].link != currentSoundLink) {
-                    currentSoundLink = it[0].link
-                    stopPlayingSound()
-                    setMediaPlayer(it[0].link)
-                    if (playing) startPlayingSound()
-                }
-            }, {
-                Timber.e(it)
-            }).also { compositeDisposable.add(it) }
+    private fun initAllMediaPlayers() {
+        for (i in 0..4) {
+            getReadyMediaPlayer(i)
+        }
     }
 
-    private fun setMediaPlayer(link: String?) {
-        val uri: Uri = Uri.parse(BuildConfig.BASE_URL + link) ?: return
+    private fun getReadyMediaPlayer(modeIdx: Int) {
+        val arrSoundLinks = arrayOf(
+            viewModel.adrenalineSoundLinks,
+            viewModel.healingSoundLinks,
+            viewModel.deepsleepSoundLinks,
+            viewModel.focusSoundLinks,
+            viewModel.recoverySoundLinks
+        )
+
+        val uri = Uri.parse(BuildConfig.BASE_URL + arrSoundLinks[modeIdx][currentSoundIdx[modeIdx]].link)
 
         try {
-            mediaPlayer = MediaPlayer()
-            mediaPlayer.setDataSource(this@MainActivity, uri)
+            mediaPlayers[modeIdx] = MediaPlayer()
+            mediaPlayers[modeIdx].setDataSource(this@MainActivity, uri)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                mediaPlayer.setAudioAttributes(AudioAttributes.Builder()
-                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                    .build())
+                mediaPlayers[modeIdx].setAudioAttributes(
+                    AudioAttributes.Builder()
+                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                        .build()
+                )
             } else {
-                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
+                mediaPlayers[modeIdx].setAudioStreamType(AudioManager.STREAM_MUSIC)
             }
-            mediaPlayer.isLooping = true
-            mediaPlayer.prepare()
+            mediaPlayers[modeIdx].setOnCompletionListener {
+                currentSoundIdx[modeIdx] = if (currentSoundIdx[modeIdx] == arrSoundLinks[modeIdx].size - 1) {
+                    0
+                } else {
+                    currentSoundIdx[modeIdx] + 1
+                }
+                it.release()
+                getReadyMediaPlayer(modeIdx)
+            }
         } catch (exception: Exception) {
             Timber.e(exception)
         }
     }
 
-    private fun startPlayingSound() {
-        //mediaPlayer.setOnPreparedListener { mediaPlayer.start() }
-        mediaPlayer.start()
+    private fun startPlayingSound(modeIdx: Int) {
+        mediaPlayers[modeIdx].prepareAsync()
+        mediaPlayers[modeIdx].setOnPreparedListener {
+            it.start()
+        }
     }
 
-    private fun pausePlayingSound() {
-        mediaPlayer.pause()
+    private fun pausePlayingSound(modeIdx: Int) {
+        mediaPlayers[modeIdx].pause()
     }
 
-    private fun resumePlayingSound() {
-        mediaPlayer.seekTo(mediaPlayer.currentPosition)
-        mediaPlayer.start()
+    private fun resumePlayingSound(modeIdx: Int) {
+        mediaPlayers[modeIdx].seekTo(mediaPlayers[modeIdx].currentPosition)
+        mediaPlayers[modeIdx].start()
     }
 
-    private fun stopPlayingSound() {
-        mediaPlayer.stop()
+    private fun stopPlayingSound(modeIdx: Int) {
+        mediaPlayers[modeIdx].stop()
     }
 
     override fun onDestroy() {
-        mediaPlayer.stop()
+        for (mediaPlayer in mediaPlayers) {
+            mediaPlayer.release()
+        }
         viewModel.saveLastPageIdx(currentModeIdx)
         viewModel.savePauseInfo(playing.not())
         super.onDestroy()
