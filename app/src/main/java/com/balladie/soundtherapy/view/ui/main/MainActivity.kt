@@ -1,11 +1,17 @@
 package com.balladie.soundtherapy.view.ui.main
 
+import android.app.Activity
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
+import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -13,6 +19,7 @@ import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -23,9 +30,11 @@ import com.balladie.soundtherapy.network.model.SoundInfo
 import com.balladie.soundtherapy.view.setThrottledOnClickListener
 import com.balladie.soundtherapy.view.setWindowFullScreen
 import com.balladie.soundtherapy.view.ui.base.BaseActivity
+import com.balladie.soundtherapy.view.ui.settings.SettingsActivity
 import com.balladie.soundtherapy.view.ui.timer.TimerActivity
 import com.flaviofaria.kenburnsview.RandomTransitionGenerator
 import timber.log.Timber
+import java.util.*
 import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
@@ -35,7 +44,39 @@ class MainActivity : BaseActivity() {
     private val viewModel by viewModels<MainViewModel> { viewModelFactory }
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var alarmManager: AlarmManager
     private val mediaPlayers = arrayListOf(MediaPlayer(), MediaPlayer(), MediaPlayer(), MediaPlayer(), MediaPlayer())
+    private var pendingIntent: PendingIntent? = null
+    private val timerReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            Toast.makeText(context, "Alarm! Paused playing sound.", Toast.LENGTH_SHORT).show()
+            if (playing) {
+                pausePlayingSound(currentModeIdx)
+            }
+
+            alarmOn = false
+            binding.imageIconAlarmBg.clearAnimation()
+            binding.imageIconAlarmBg.animate().cancel()
+            binding.imageIconAlarmBg.alpha = 1.0f
+        }
+    }
+    private val timerReceiverWithSound = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            Toast.makeText(context, "Alarm! Paused playing sound.", Toast.LENGTH_SHORT).show()
+            if (playing) {
+                pausePlayingSound(currentModeIdx)
+            }
+
+            val notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+            val alarmSoundPlayer = MediaPlayer.create(context, notification)
+            alarmSoundPlayer.start()
+
+            alarmOn = false
+            binding.imageIconAlarmBg.clearAnimation()
+            binding.imageIconAlarmBg.animate().cancel()
+            binding.imageIconAlarmBg.alpha = 1.0f
+        }
+    }
 
     private var currentModeIdx: Int = 0
     private var pausedMode: Int = 0
@@ -46,6 +87,8 @@ class MainActivity : BaseActivity() {
             Intent(context, MainActivity::class.java)
 
         private var playing: Boolean = true
+        private var alarmOn: Boolean = false
+        private const val TIMER_INTENT_VALUE = 99
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +98,9 @@ class MainActivity : BaseActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.lifecycleOwner = this
+
+        registerReceiver(timerReceiverWithSound, IntentFilter("timerReceiverWithSound"))
+        registerReceiver(timerReceiver, IntentFilter("timerReceiver"))
 
         setupBg()
         initializeMode()
@@ -115,7 +161,15 @@ class MainActivity : BaseActivity() {
         playing = viewModel.getSavedPauseInfo().not()
 
         if (playing.not()) {
-            binding.bgMain.alpha = 0.3f
+            binding.bgMain.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_out_bg).apply {
+                duration = 200
+                fillAfter = true
+                setAnimationListener(object: Animation.AnimationListener {
+                    override fun onAnimationRepeat(p0: Animation) {}
+                    override fun onAnimationEnd(p0: Animation) {}
+                    override fun onAnimationStart(p0: Animation) {}
+                })
+            })
             binding.imageIconPause.visibility = View.GONE
             binding.imageIconMusic.visibility = View.VISIBLE
         } else {
@@ -197,22 +251,7 @@ class MainActivity : BaseActivity() {
         }
 
         binding.imageIconPause.setThrottledOnClickListener {
-            binding.bgMain.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_out_bg).apply {
-                duration = 500
-                fillAfter = true
-                setAnimationListener(object: Animation.AnimationListener {
-                    override fun onAnimationRepeat(p0: Animation) {}
-                    override fun onAnimationEnd(p0: Animation) {
-                    }
-                    override fun onAnimationStart(p0: Animation) {
-                        pausedMode = currentModeIdx
-                        pausePlayingSound(currentModeIdx)
-                    }
-                })
-            })
-            binding.imageIconPause.visibility = View.GONE
-            binding.imageIconMusic.visibility = View.VISIBLE
-            playing = playing.not()
+            pausePlayingSound(currentModeIdx)
         }
 
         binding.imageIconMusic.setThrottledOnClickListener {
@@ -238,7 +277,18 @@ class MainActivity : BaseActivity() {
         }
 
         binding.imageIconAlarmBg.setThrottledOnClickListener {
-            startActivity(TimerActivity.intent(this))
+            if (alarmOn) {
+                alarmOn = false
+                binding.imageIconAlarmBg.clearAnimation()
+                binding.imageIconAlarmBg.animate().cancel()
+                binding.imageIconAlarmBg.alpha = 1.0f
+            } else {
+                startActivityForResult(TimerActivity.intent(this), TIMER_INTENT_VALUE)
+            }
+        }
+
+        binding.imageIconSettings.setThrottledOnClickListener {
+            startActivity(SettingsActivity.intent(this))
         }
     }
 
@@ -334,6 +384,9 @@ class MainActivity : BaseActivity() {
                 }
                 it.release()
                 getReadyMediaPlayer(modeIdx)
+                if (playing) {
+                    startPlayingSound(modeIdx)
+                }
             }
         } catch (exception: Exception) {
             Timber.e(exception)
@@ -348,7 +401,21 @@ class MainActivity : BaseActivity() {
     }
 
     private fun pausePlayingSound(modeIdx: Int) {
-        mediaPlayers[modeIdx].pause()
+        binding.bgMain.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_out_bg).apply {
+            duration = 500
+            fillAfter = true
+            setAnimationListener(object: Animation.AnimationListener {
+                override fun onAnimationRepeat(p0: Animation) {}
+                override fun onAnimationEnd(p0: Animation) {}
+                override fun onAnimationStart(p0: Animation) {
+                    pausedMode = currentModeIdx
+                    mediaPlayers[modeIdx].pause()
+                }
+            })
+        })
+        binding.imageIconPause.visibility = View.GONE
+        binding.imageIconMusic.visibility = View.VISIBLE
+        playing = playing.not()
     }
 
     private fun resumePlayingSound(modeIdx: Int) {
@@ -360,12 +427,94 @@ class MainActivity : BaseActivity() {
         mediaPlayers[modeIdx].stop()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        when (requestCode) {
+            TIMER_INTENT_VALUE -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    if (data == null) {
+                        Timber.e("Timer data is null...")
+                        Toast.makeText(this, "Error setting timer: data received null.", Toast.LENGTH_SHORT).show()
+                        return
+                    } else {
+                        Timber.d("${data.getIntExtra("hour", 0)}, ${data.getIntExtra("minute", 0)}, ${data.getBooleanExtra("enableSound", false)}")
+                        setTimer(
+                            data.getIntExtra("hour", 0),
+                            data.getIntExtra("minute", 0),
+                            data.getBooleanExtra("enableSound", false)
+                        )
+                    }
+                } else {
+                    Timber.d("resultCode: $resultCode")
+                }
+            }
+        }
+    }
+
+    private fun setTimer(hour: Int, minute: Int, enableSound: Boolean) {
+        val calendar = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, hour)
+            set(Calendar.MINUTE, minute)
+            set(Calendar.SECOND, 0)
+        }
+
+        pendingIntent = if (enableSound) {
+            PendingIntent.getBroadcast(this, 0, Intent("timerReceiverWithSound"), 0)
+        } else {
+            PendingIntent.getBroadcast(this, 0, Intent("timerReceiver"), 0)
+        }
+        alarmManager = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmManager.set(AlarmManager.RTC, calendar.timeInMillis, pendingIntent)
+        alarmOn = true
+        setAlarmIconAnimate()
+    }
+
+    private fun setAlarmIconAnimate() {
+        val animFadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in).apply {
+            duration = 500
+            fillAfter = true
+        }
+        val animFadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out).apply {
+            duration = 500
+            fillAfter = true
+        }
+        animFadeIn.setAnimationListener(object: Animation.AnimationListener {
+            override fun onAnimationRepeat(p0: Animation) {}
+            override fun onAnimationEnd(p0: Animation) {
+                if (alarmOn) {
+                    binding.imageIconAlarmBg.startAnimation(animFadeOut)
+                }
+            }
+            override fun onAnimationStart(p0: Animation) {}
+        })
+        animFadeOut.setAnimationListener(object: Animation.AnimationListener {
+            override fun onAnimationRepeat(p0: Animation) {}
+            override fun onAnimationEnd(p0: Animation) {
+                if (alarmOn) {
+                    binding.imageIconAlarmBg.startAnimation(animFadeIn)
+                }
+            }
+            override fun onAnimationStart(p0: Animation) {}
+        })
+
+        binding.imageIconAlarmBg.startAnimation(animFadeOut)
+    }
+
     override fun onDestroy() {
         for (mediaPlayer in mediaPlayers) {
             mediaPlayer.release()
         }
+
         viewModel.saveLastPageIdx(currentModeIdx)
         viewModel.savePauseInfo(playing.not())
+
+        if (pendingIntent != null) {
+            alarmManager.cancel(pendingIntent)
+        }
+        unregisterReceiver(timerReceiverWithSound)
+        unregisterReceiver(timerReceiver)
+
         super.onDestroy()
     }
 }

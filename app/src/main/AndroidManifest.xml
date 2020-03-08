@@ -37,6 +37,12 @@
         </activity>
         <activity
             android:name=".view.ui.timer.TimerActivity"
+            android:theme="@style/Theme.AppCompat.Transparent"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".view.ui.settings.SettingsActivity"
+            android:theme="@style/Theme.AppCompat.Transparent"
             android:screenOrientation="portrait" >
         </activity>
 

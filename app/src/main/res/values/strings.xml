@@ -59,4 +59,8 @@
     <string name="image_icon_timer">icon_timer.png</string>
     <string name="image_text_shout_off_timer">text_shout_off_timer.png</string>
     <string name="image_text_timer_explained">text_timer_explained.png</string>
+    <string name="image_rect_timepicker_timer">rect_timepicker_timer.png</string>
+    <string name="image_text_alarm_sound">text_alarm_sound.png</string>
+    <string name="image_btn_cancel_timer">btn_cancel_timer.png</string>
+    <string name="image_btn_set_timer">btn_set_timer.png</string>
 </resources>

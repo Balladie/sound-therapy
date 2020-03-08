@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.balladie.soundtherapy.view.ui.main.MainViewModel
 import com.balladie.soundtherapy.view.ui.processed.ProcessedViewModel
+import com.balladie.soundtherapy.view.ui.settings.SettingsViewModel
 import com.balladie.soundtherapy.view.ui.splash.SplashViewModel
 import com.balladie.soundtherapy.view.ui.timer.TimerViewModel
 import com.balladie.soundtherapy.view.ui.tutorial.TutorialViewModel
@@ -39,6 +40,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(TimerViewModel::class)
     abstract fun timer(timerViewModel: TimerViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SettingsViewModel::class)
+    abstract fun settings(settingsViewModel: SettingsViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

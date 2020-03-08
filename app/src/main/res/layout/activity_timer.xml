@@ -50,14 +50,77 @@
             app:layout_constraintTop_toBottomOf="@+id/image_text_shout_off_timer"
             app:srcCompat="@drawable/text_timer_explained" />
 
+        <ImageView
+            android:id="@+id/image_rect_timepicker_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:contentDescription="@string/image_rect_timepicker_timer"
+            app:layout_constraintEnd_toEndOf="@+id/image_rect_bg_timer"
+            app:layout_constraintStart_toStartOf="@+id/image_rect_bg_timer"
+            app:layout_constraintTop_toBottomOf="@+id/image_text_timer_explained"
+            app:srcCompat="@drawable/rect_timepicker_timer" />
+
         <TimePicker
             android:id="@+id/timepicker_timer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:theme="@style/DefaultNumberPickerTheme"
             android:timePickerMode="spinner"
-            app:layout_constraintEnd_toEndOf="@+id/image_rect_bg_timer"
-            app:layout_constraintStart_toStartOf="@+id/image_rect_bg_timer"
-            app:layout_constraintTop_toBottomOf="@+id/image_text_timer_explained" />
+            app:layout_constraintBottom_toBottomOf="@+id/image_rect_timepicker_timer"
+            app:layout_constraintEnd_toEndOf="@+id/image_rect_timepicker_timer"
+            app:layout_constraintStart_toStartOf="@+id/image_rect_timepicker_timer"
+            app:layout_constraintTop_toTopOf="@+id/image_rect_timepicker_timer" />
+
+        <ImageView
+            android:id="@+id/image_text_alarm_sound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginRight="18dp"
+            android:contentDescription="@string/image_text_alarm_sound"
+            app:layout_constraintEnd_toStartOf="@+id/image_icon_timer"
+            app:layout_constraintTop_toBottomOf="@+id/timepicker_timer"
+            app:srcCompat="@drawable/text_alarm_sound" />
+
+        <Switch
+            android:id="@+id/switch_alarm_sound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="26dp"
+            android:switchMinWidth="0dp"
+            android:textOff=""
+            android:textOn=""
+            android:thumb="@drawable/switch_thumb"
+            android:thumbTextPadding="15dp"
+            android:track="@drawable/switch_track_selector"
+            app:layout_constraintStart_toEndOf="@+id/image_icon_timer"
+            app:layout_constraintTop_toBottomOf="@+id/timepicker_timer" />
+
+        <ImageView
+            android:id="@+id/image_btn_cancel_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:contentDescription="@string/image_btn_cancel_timer"
+            app:layout_constraintBottom_toBottomOf="@+id/image_rect_bg_timer"
+            app:layout_constraintEnd_toStartOf="@+id/image_icon_timer"
+            app:layout_constraintTop_toBottomOf="@+id/image_text_alarm_sound"
+            app:srcCompat="@drawable/btn_cancel_timer" />
+
+        <ImageView
+            android:id="@+id/image_btn_set_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:contentDescription="@string/image_btn_set_timer"
+            app:layout_constraintBottom_toBottomOf="@+id/image_rect_bg_timer"
+            app:layout_constraintStart_toEndOf="@+id/image_icon_timer"
+            app:layout_constraintTop_toBottomOf="@+id/image_text_alarm_sound"
+            app:srcCompat="@drawable/btn_set_timer" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

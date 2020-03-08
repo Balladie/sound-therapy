@@ -5,6 +5,8 @@ import android.os.Build
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import android.widget.NumberPicker
+import com.balladie.soundtherapy.R
 
 abstract class ThrottledOnClickListener(private val throttleInMillis: Long = 500L) :
     View.OnClickListener {
