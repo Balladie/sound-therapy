@@ -31,10 +31,10 @@
     <string name="image_text_recovery_mode">text_recovery_mode.png</string>
     <string name="image_text_recovery_explained">text_recovery_explained.png</string>
     <string name="image_icon_recovery_mode">icon_recovery_mode.png</string>
-    <string name="text_title_adrenaline">Adrenaline Mode</string>
-    <string name="text_title_healing">Refresh Air</string>
-    <string name="text_title_deepsleep">New Ambient</string>
-    <string name="text_title_focus">Deep Focus</string>
+    <string name="text_title_adrenaline">Adrenaline Rush</string>
+    <string name="text_title_healing">Healing Mind</string>
+    <string name="text_title_deepsleep">Deep Sleep</string>
+    <string name="text_title_focus">Focus On</string>
     <string name="text_title_recovery">Recovery</string>
     <string name="image_icon_adrenaline_unselected">icon_adrenaline_unselected.png</string>
     <string name="image_icon_healing_unselected">icon_healing_unselected.png</string>

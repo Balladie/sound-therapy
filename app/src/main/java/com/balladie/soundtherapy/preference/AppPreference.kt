@@ -18,6 +18,11 @@ class AppPreference @Inject constructor(
     val wasPaused: Boolean get() = _wasPaused ?: false
     private var _wasPaused by prefBoolean(sharedPreferences, PrefKey.WASPLAYING)
 
+    val gotHealthAccess: Boolean get() = _gotHealthAccess ?: false
+    private var _gotHealthAccess by prefBoolean(sharedPreferences, PrefKey.GOTHEALTHACCESS)
+    val gotLocationAccess: Boolean get() = _gotLocationAccess ?: false
+    private var _gotLocationAccess by prefBoolean(sharedPreferences, PrefKey.GOTLOCATIONACCESS)
+
     fun setLoginOn() {
         _isOldUser = true
     }
@@ -28,6 +33,14 @@ class AppPreference @Inject constructor(
 
     fun setWasPaused(paused: Boolean) {
         _wasPaused = paused
+    }
+
+    fun turnOnHealthAccess() {
+        _gotHealthAccess = true
+    }
+
+    fun turnOnLocationAccess() {
+        _gotLocationAccess = true
     }
 
     fun clear() {

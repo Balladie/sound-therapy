@@ -21,6 +21,7 @@
             android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            tools:layout_height="match_parent"
             android:fillViewport="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -146,6 +147,141 @@
                     app:layout_constraintTop_toTopOf="@+id/image_btn_logout_bg"
                     app:srcCompat="@drawable/btn_logout_image" />
 
+                <ImageView
+                    android:id="@+id/image_line_data_access_settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="52dp"
+                    android:layout_marginEnd="45dp"
+                    android:layout_marginRight="45dp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/image_bg_circle_account"
+                    app:srcCompat="@drawable/line_account_settings" />
+
+                <ImageView
+                    android:id="@+id/image_text_data_access"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="45dp"
+                    android:layout_marginLeft="45dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@android:color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/image_bg_circle_account"
+                    app:srcCompat="@drawable/text_data_access" />
+
+                <ImageView
+                    android:id="@+id/image_text_data_access_explained"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/image_text_data_access"
+                    app:srcCompat="@drawable/text_data_access_explained" />
+
+                <ImageView
+                    android:id="@+id/image_btn_health_allowed_bg_settings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/image_text_data_access_explained"
+                    app:srcCompat="@drawable/btn_allowed_bg_settings" />
+
+                <ImageView
+                    android:id="@+id/image_btn_location_allowed_bg_settings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/image_btn_health_allowed_bg_settings"
+                    app:srcCompat="@drawable/btn_allowed_bg_settings" />
+
+                <ImageView
+                    android:id="@+id/image_line_data_management_settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="47dp"
+                    android:layout_marginEnd="45dp"
+                    android:layout_marginRight="45dp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/image_btn_location_allowed_bg_settings"
+                    app:srcCompat="@drawable/line_account_settings" />
+
+                <ImageView
+                    android:id="@+id/image_text_data_management"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="45dp"
+                    android:layout_marginLeft="45dp"
+                    android:layout_marginTop="35dp"
+                    android:background="@android:color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/image_btn_location_allowed_bg_settings"
+                    app:srcCompat="@drawable/text_data_management" />
+
+                <ImageView
+                    android:id="@+id/image_text_data_management_explained"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/image_text_data_management"
+                    app:srcCompat="@drawable/text_data_management_explained" />
+
+                <ImageView
+                    android:id="@+id/image_btn_remove_data_bg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/image_text_data_management_explained"
+                    app:srcCompat="@drawable/btn_bg_filled_settings" />
+
+                <ImageView
+                    android:id="@+id/image_btn_remove_data_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/image_btn_remove_data_bg"
+                    app:layout_constraintEnd_toEndOf="@+id/image_btn_remove_data_bg"
+                    app:layout_constraintStart_toStartOf="@+id/image_btn_remove_data_bg"
+                    app:layout_constraintTop_toTopOf="@+id/image_btn_remove_data_bg"
+                    app:srcCompat="@drawable/btn_remove_data_text" />
+
+                <ImageView
+                    android:id="@+id/image_btn_health_allowed_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/image_btn_health_allowed_bg_settings"
+                    app:layout_constraintEnd_toEndOf="@+id/image_btn_health_allowed_bg_settings"
+                    app:layout_constraintStart_toStartOf="@+id/image_btn_health_allowed_bg_settings"
+                    app:layout_constraintTop_toTopOf="@+id/image_btn_health_allowed_bg_settings"
+                    app:srcCompat="@drawable/btn_health_allowed_text" />
+
+                <ImageView
+                    android:id="@+id/image_btn_location_allowed_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/image_btn_location_allowed_bg_settings"
+                    app:layout_constraintEnd_toEndOf="@+id/image_btn_location_allowed_bg_settings"
+                    app:layout_constraintStart_toStartOf="@+id/image_btn_location_allowed_bg_settings"
+                    app:layout_constraintTop_toTopOf="@+id/image_btn_location_allowed_bg_settings"
+                    app:srcCompat="@drawable/btn_location_allowed_text" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>

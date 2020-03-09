@@ -47,11 +47,100 @@ class AdrenalineFragment : BaseFragment() {
     }
 
     private fun setupViews(context: Context) {
+        if (TutorialActivity.gotHealthAccess) {
+            binding.imageBtnHealthAccessText.isClickable = false
+            binding.imageBtnHealthAccessText.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out).apply {
+                duration = 500
+                fillAfter = true
+                setAnimationListener(object: Animation.AnimationListener {
+                    override fun onAnimationRepeat(p0: Animation) {}
+                    override fun onAnimationEnd(p0: Animation) {}
+                    override fun onAnimationStart(p0: Animation) {}
+                })
+            })
+            binding.imageBtnHealthAccessBg.isClickable = false
+            binding.imageBtnHealthAccessBg.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out).apply {
+                duration = 500
+                fillAfter = true
+                setAnimationListener(object: Animation.AnimationListener {
+                    override fun onAnimationRepeat(p0: Animation) {}
+                    override fun onAnimationEnd(p0: Animation) {
+                        if (TutorialActivity.gotLocationAccess) {
+                            TutorialActivity.binding.viewPagerTutorial.currentItem = 1
+                        }
+                    }
+                    override fun onAnimationStart(p0: Animation) {}
+                })
+            })
+        }
+        if (TutorialActivity.gotLocationAccess) {
+            binding.imageBtnLocationAccess.isClickable = false
+            binding.imageBtnLocationAccess.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out).apply {
+                duration = 500
+                fillAfter = true
+                setAnimationListener(object: Animation.AnimationListener {
+                    override fun onAnimationRepeat(p0: Animation) {}
+                    override fun onAnimationEnd(p0: Animation) {
+                        if (TutorialActivity.gotHealthAccess && TutorialActivity.gotLocationAccess) {
+                            TutorialActivity.binding.viewPagerTutorial.currentItem = 1
+                        }
+                    }
+                    override fun onAnimationStart(p0: Animation) {}
+                })
+            })
+        }
+
         binding.imageBtnHealthAccessBg.setThrottledOnClickListener {
-            Toast.makeText(context, "btn clicked", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Will be updated, stay tuned!", Toast.LENGTH_SHORT).show()
+            binding.imageBtnHealthAccessText.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out).apply {
+                duration = 500
+                fillAfter = true
+                setAnimationListener(object: Animation.AnimationListener {
+                    override fun onAnimationRepeat(p0: Animation) {}
+                    override fun onAnimationEnd(p0: Animation) {}
+                    override fun onAnimationStart(p0: Animation) {}
+                })
+            })
+            binding.imageBtnHealthAccessBg.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out).apply {
+                duration = 500
+                fillAfter = true
+                setAnimationListener(object: Animation.AnimationListener {
+                    override fun onAnimationRepeat(p0: Animation) {}
+                    override fun onAnimationEnd(p0: Animation) {
+                        TutorialActivity.gotHealthAccess = true
+                        if (TutorialActivity.gotHealthAccess && TutorialActivity.gotLocationAccess) {
+                            TutorialActivity.binding.viewPagerTutorial.currentItem++
+                        }
+                    }
+                    override fun onAnimationStart(p0: Animation) {}
+                })
+            })
         }
         binding.imageBtnHealthAccessText.setThrottledOnClickListener {
-            Toast.makeText(context, "btn clicked", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Will be updated, stay tuned!", Toast.LENGTH_SHORT).show()
+            binding.imageBtnHealthAccessText.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out).apply {
+                duration = 500
+                fillAfter = true
+                setAnimationListener(object: Animation.AnimationListener {
+                    override fun onAnimationRepeat(p0: Animation) {}
+                    override fun onAnimationEnd(p0: Animation) {}
+                    override fun onAnimationStart(p0: Animation) {}
+                })
+            })
+            binding.imageBtnHealthAccessBg.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out).apply {
+                duration = 500
+                fillAfter = true
+                setAnimationListener(object: Animation.AnimationListener {
+                    override fun onAnimationRepeat(p0: Animation) {}
+                    override fun onAnimationEnd(p0: Animation) {
+                        TutorialActivity.gotHealthAccess = true
+                        if (TutorialActivity.gotHealthAccess && TutorialActivity.gotLocationAccess) {
+                            TutorialActivity.binding.viewPagerTutorial.currentItem++
+                        }
+                    }
+                    override fun onAnimationStart(p0: Animation) {}
+                })
+            })
         }
 
         binding.imageBtnLocationAccess.setThrottledOnClickListener {
@@ -86,6 +175,7 @@ class AdrenalineFragment : BaseFragment() {
                         binding.imageBtnLocationAccess.isClickable = false
                         binding.imageBtnLocationAccess.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out).apply {
                             duration = 500
+                            fillAfter = true
                             setAnimationListener(object: Animation.AnimationListener {
                                 override fun onAnimationRepeat(p0: Animation) {}
                                 override fun onAnimationEnd(p0: Animation) {

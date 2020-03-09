@@ -32,7 +32,7 @@ class TutorialActivity : BaseActivity() {
 
         lateinit var binding: ActivityTutorialBinding
 
-        var gotHealthAccess: Boolean = true     // set it false after processing Google Fit API
+        var gotHealthAccess: Boolean = false
         var gotLocationAccess: Boolean = false
         var finishedTutorial: Boolean = false
     }
@@ -44,6 +44,9 @@ class TutorialActivity : BaseActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_tutorial)
         binding.lifecycleOwner = this
+
+        gotHealthAccess = viewModel.getIsHealthAccessOn()
+        gotLocationAccess = viewModel.getIsLocationAccessOn()
 
         setupViews()
     }
@@ -73,10 +76,17 @@ class TutorialActivity : BaseActivity() {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
-
         if (finishedTutorial) {
             viewModel.setLoginOn()
         }
+
+        if (gotHealthAccess) {
+            viewModel.turnOnHealthAccess()
+        }
+        if (gotLocationAccess) {
+            viewModel.turnOnLocationAccess()
+        }
+
+        super.onDestroy()
     }
 }

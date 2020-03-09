@@ -2,7 +2,10 @@ package com.balladie.soundtherapy.view.ui.settings
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -45,5 +48,57 @@ class SettingsActivity : BaseActivity() {
         binding.imageExitSettings.setThrottledOnClickListener {
             finish()
         }
+
+        // Account
+        binding.textCircleAccount.setThrottledOnClickListener {
+            accountSettings()
+        }
+        binding.textNameAccount.setThrottledOnClickListener {
+            accountSettings()
+        }
+        binding.textSubscribedAccount.setThrottledOnClickListener {
+            accountSettings()
+        }
+
+        // Logout
+        binding.imageBtnLogoutBg.setThrottledOnClickListener {
+            logoutAccount()
+        }
+        binding.imageBtnLogoutImage.setThrottledOnClickListener {
+            logoutAccount()
+        }
+
+        // Health Access
+        binding.imageBtnHealthAllowedBgSettings.setThrottledOnClickListener {
+            manageHealthAccess()
+        }
+        binding.imageBtnHealthAllowedText.setThrottledOnClickListener {
+            manageHealthAccess()
+        }
+
+        // Remove data
+        binding.imageBtnRemoveDataBg.setThrottledOnClickListener {
+            removePersonalData()
+        }
+    }
+
+    // Will be updated: Account
+    private fun accountSettings() {
+        Toast.makeText(this, "Will be updated soon, Stay tuned!", Toast.LENGTH_SHORT).show()
+    }
+    private fun logoutAccount() {
+        Toast.makeText(this, "Will be updated soon, Stay tuned!", Toast.LENGTH_SHORT).show()
+    }
+
+    // Will be updated: Health Access
+    private fun manageHealthAccess() {
+        Toast.makeText(this, "Yeah you're right, it's not allowed actually. Will be updated soon, Stay tuned!", Toast.LENGTH_LONG).show()
+    }
+
+    private fun removePersonalData() {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+            Uri.fromParts("package", packageName, null))
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
     }
 }

@@ -42,8 +42,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            // TODO: Plz buy me a domain
-            buildConfigField "String", "BASE_URL", "\"https://MYURL.com:xxxx\""
+            buildConfigField "String", "BASE_URL","\"${getProperty("local.properties", "base_url")}\""
         }
     }
     dataBinding {

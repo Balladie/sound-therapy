@@ -11,4 +11,16 @@ class TutorialViewModel @Inject constructor(
     fun setLoginOn() {
         preference.setLoginOn()
     }
+
+    fun getIsHealthAccessOn() = preference.gotHealthAccess
+
+    fun getIsLocationAccessOn() = preference.gotLocationAccess
+
+    fun turnOnHealthAccess() {
+        preference.turnOnHealthAccess()
+    }
+
+    fun turnOnLocationAccess() {
+        preference.turnOnLocationAccess()
+    }
 }

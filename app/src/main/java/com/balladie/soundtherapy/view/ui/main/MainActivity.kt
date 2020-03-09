@@ -104,6 +104,7 @@ class MainActivity : BaseActivity() {
 
         setupBg()
         initializeMode()
+        initAnims()
         getLinksFromExtra()
         initAllMediaPlayers()
         setupBtnListeners()
@@ -231,6 +232,19 @@ class MainActivity : BaseActivity() {
                 binding.imageIconRecoveryUnselected.visibility = View.INVISIBLE
             }
         }
+    }
+
+    private fun initAnims() {
+        binding.textModeMain.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in).apply {
+            duration = 1000
+            fillBefore = true
+            fillAfter = true
+            setAnimationListener(object: Animation.AnimationListener {
+                override fun onAnimationRepeat(p0: Animation) {}
+                override fun onAnimationEnd(p0: Animation) {}
+                override fun onAnimationStart(p0: Animation) {}
+            })
+        })
     }
 
     private fun setupBtnListeners() {
