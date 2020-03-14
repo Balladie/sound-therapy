@@ -60,11 +60,11 @@ class TutorialActivity : BaseActivity() {
         binding.viewPagerTutorial.adapter =
             object : FragmentStateAdapter(supportFragmentManager, lifecycle) {
                 val fragments = listOf(
-                    AdrenalineFragment.create(),
                     HealingFragment.create(),
                     DeepsleepFragment.create(),
                     FocusFragment.create(),
-                    RecoveryFragment.create()
+                    RecoveryFragment.create(),
+                    AdrenalineFragment.create()
                 )
 
                 override fun getItemCount(): Int = fragments.size

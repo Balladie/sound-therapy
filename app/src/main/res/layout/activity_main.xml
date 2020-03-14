@@ -32,16 +32,6 @@
             tools:text="Mode Title" />
 
         <ImageView
-            android:id="@+id/image_icon_adrenaline_selected"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="148dp"
-            android:contentDescription="@string/image_icon_adrenaline_selected"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/image_icon_healing_selected"
-            app:srcCompat="@drawable/icon_adrenaline_selected" />
-
-        <ImageView
             android:id="@+id/image_icon_healing_selected"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -57,19 +47,19 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="149dp"
             android:contentDescription="@string/image_icon_deepsleep_selected"
-            app:layout_constraintBottom_toBottomOf="@+id/bg_main"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/image_icon_focus_selected"
             app:srcCompat="@drawable/icon_deepsleep_selected" />
 
         <ImageView
             android:id="@+id/image_icon_focus_selected"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="149dp"
+            android:layout_marginBottom="148dp"
             android:contentDescription="@string/image_icon_focus_selected"
             app:layout_constraintBottom_toBottomOf="@+id/bg_main"
-            app:layout_constraintStart_toEndOf="@+id/image_icon_deepsleep_selected"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/icon_focus_selected" />
 
         <ImageView
@@ -78,21 +68,19 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="149dp"
             android:contentDescription="@string/image_icon_recovery_selected"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/bg_main"
             app:layout_constraintStart_toEndOf="@+id/image_icon_focus_selected"
             app:srcCompat="@drawable/icon_recovery_selected" />
 
         <ImageView
-            android:id="@+id/image_icon_adrenaline_unselected"
+            android:id="@+id/image_icon_adrenaline_selected"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="14dp"
-            android:layout_marginRight="14dp"
-            android:layout_marginBottom="180dp"
-            android:contentDescription="@string/image_icon_adrenaline_unselected"
+            android:layout_marginBottom="148dp"
+            android:contentDescription="@string/image_icon_adrenaline_selected"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/image_icon_healing_unselected"
-            app:srcCompat="@drawable/icon_adrenaline_unselected" />
+            app:layout_constraintStart_toEndOf="@+id/image_icon_recovery_selected"
+            app:srcCompat="@drawable/icon_adrenaline_selected" />
 
         <ImageView
             android:id="@+id/image_icon_healing_unselected"
@@ -110,23 +98,23 @@
             android:id="@+id/image_icon_deepsleep_unselected"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="14dp"
+            android:layout_marginRight="14dp"
             android:layout_marginBottom="180dp"
             android:contentDescription="@string/image_icon_deepsleep_unselected"
-            app:layout_constraintBottom_toBottomOf="@+id/bg_main"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/image_icon_focus_unselected"
             app:srcCompat="@drawable/icon_deepsleep_unselected" />
 
         <ImageView
             android:id="@+id/image_icon_focus_unselected"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginLeft="14dp"
             android:layout_marginBottom="180dp"
             android:contentDescription="@string/image_icon_focus_unselected"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/image_icon_deepsleep_unselected"
+            app:layout_constraintBottom_toBottomOf="@+id/bg_main"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/icon_focus_unselected" />
 
         <ImageView
@@ -137,9 +125,21 @@
             android:layout_marginLeft="14dp"
             android:layout_marginBottom="180dp"
             android:contentDescription="@string/image_icon_recovery_unselected"
-            app:layout_constraintBottom_toBottomOf="@+id/bg_main"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/image_icon_focus_unselected"
             app:srcCompat="@drawable/icon_recovery_unselected" />
+
+        <ImageView
+            android:id="@+id/image_icon_adrenaline_unselected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="180dp"
+            android:contentDescription="@string/image_icon_adrenaline_unselected"
+            app:layout_constraintBottom_toBottomOf="@+id/bg_main"
+            app:layout_constraintStart_toEndOf="@+id/image_icon_recovery_unselected"
+            app:srcCompat="@drawable/icon_adrenaline_unselected" />
 
         <ImageView
             android:id="@+id/image_icon_alarm_bg"
@@ -149,7 +149,7 @@
             android:contentDescription="@string/image_icon_alarm_bg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_icon_deepsleep_unselected"
+            app:layout_constraintTop_toBottomOf="@+id/image_icon_focus_unselected"
             app:srcCompat="@drawable/icon_under_bg" />
 
         <ImageView
@@ -172,7 +172,7 @@
             android:layout_marginRight="40dp"
             android:contentDescription="@string/image_icon_pause"
             app:layout_constraintEnd_toStartOf="@+id/image_icon_alarm_bg"
-            app:layout_constraintTop_toBottomOf="@+id/image_icon_deepsleep_unselected"
+            app:layout_constraintTop_toBottomOf="@+id/image_icon_focus_unselected"
             app:srcCompat="@drawable/icon_pause" />
 
         <ImageView
@@ -184,7 +184,7 @@
             android:layout_marginTop="50dp"
             android:contentDescription="@string/image_icon_settings"
             app:layout_constraintStart_toEndOf="@+id/image_icon_alarm_bg"
-            app:layout_constraintTop_toBottomOf="@+id/image_icon_deepsleep_unselected"
+            app:layout_constraintTop_toBottomOf="@+id/image_icon_focus_unselected"
             app:srcCompat="@drawable/icon_settings" />
 
         <ImageView
@@ -197,7 +197,7 @@
             android:contentDescription="@string/image_icon_music"
             android:visibility="gone"
             app:layout_constraintEnd_toStartOf="@+id/image_icon_alarm_bg"
-            app:layout_constraintTop_toBottomOf="@+id/image_icon_deepsleep_unselected"
+            app:layout_constraintTop_toBottomOf="@+id/image_icon_focus_unselected"
             app:srcCompat="@drawable/icon_music" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

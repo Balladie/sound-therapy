@@ -12,7 +12,7 @@ class AppPreference @Inject constructor(
     val isOldUser: Boolean get() = _isOldUser ?: false
     private var _isOldUser by prefBoolean(sharedPreferences, PrefKey.FISRTLOGIN)
 
-    val lastPageIdx: Int get() = _lastPageIdx ?: 0
+    val lastPageIdx: Int get() = _lastPageIdx ?: 1
     private var _lastPageIdx by prefInt(sharedPreferences, PrefKey.LASTPAGEIDX)
 
     val wasPaused: Boolean get() = _wasPaused ?: false

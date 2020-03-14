@@ -9,6 +9,7 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.OvershootInterpolator
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -22,6 +23,7 @@ import com.google.android.gms.location.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 class ProcessedActivity : BaseActivity() {
@@ -177,9 +179,10 @@ class ProcessedActivity : BaseActivity() {
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null)
     }
 
+    /*
     private fun stopLocationUpdates() {
         fusedLocationClient.removeLocationUpdates(locationCallback)
-    }
+    }*/
 
     private fun getSoundLinks(location: Location) {
         viewModel.getSoundLink(0, location)
@@ -194,6 +197,8 @@ class ProcessedActivity : BaseActivity() {
                 }
             }, {
                 Timber.e(it)
+                Toast.makeText(this, "Getting sound failed. Check your internet access and if it still doesn't work, please e-mail to us.", Toast.LENGTH_LONG).show()
+                finish()
             }).also { compositeDisposable.add(it) }
         viewModel.getSoundLink(1, location)
             .subscribeOn(Schedulers.io())
@@ -207,6 +212,8 @@ class ProcessedActivity : BaseActivity() {
                 }
             }, {
                 Timber.e(it)
+                Toast.makeText(this, "Getting sound failed. Check your internet access and if it still doesn't work, please e-mail to us.", Toast.LENGTH_LONG).show()
+                finish()
             }).also { compositeDisposable.add(it) }
         viewModel.getSoundLink(2, location)
             .subscribeOn(Schedulers.io())
@@ -220,6 +227,8 @@ class ProcessedActivity : BaseActivity() {
                 }
             }, {
                 Timber.e(it)
+                Toast.makeText(this, "Getting sound failed. Check your internet access and if it still doesn't work, please e-mail to us.", Toast.LENGTH_LONG).show()
+                finish()
             }).also { compositeDisposable.add(it) }
         viewModel.getSoundLink(3, location)
             .subscribeOn(Schedulers.io())
@@ -233,6 +242,8 @@ class ProcessedActivity : BaseActivity() {
                 }
             }, {
                 Timber.e(it)
+                Toast.makeText(this, "Getting sound failed. Check your internet access and if it still doesn't work, please e-mail to us.", Toast.LENGTH_LONG).show()
+                finish()
             }).also { compositeDisposable.add(it) }
         viewModel.getSoundLink(4, location)
             .subscribeOn(Schedulers.io())
@@ -246,6 +257,8 @@ class ProcessedActivity : BaseActivity() {
                 }
             }, {
                 Timber.e(it)
+                Toast.makeText(this, "Getting sound failed. Check your internet access and if it still doesn't work, please e-mail to us.", Toast.LENGTH_LONG).show()
+                finish()
             }).also { compositeDisposable.add(it) }
     }
 }

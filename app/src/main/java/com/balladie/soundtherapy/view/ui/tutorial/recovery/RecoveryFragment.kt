@@ -10,7 +10,6 @@ import com.balladie.soundtherapy.R
 import com.balladie.soundtherapy.databinding.FragmentRecoveryBinding
 import com.balladie.soundtherapy.view.setThrottledOnClickListener
 import com.balladie.soundtherapy.view.ui.base.BaseFragment
-import com.balladie.soundtherapy.view.ui.processed.ProcessedActivity
 import com.balladie.soundtherapy.view.ui.tutorial.TutorialActivity
 
 class RecoveryFragment : BaseFragment() {
@@ -39,22 +38,10 @@ class RecoveryFragment : BaseFragment() {
 
     private fun setupViews(context: Context) {
         binding.imageBtnContinueRecoveryBg.setThrottledOnClickListener {
-            if (TutorialActivity.gotLocationAccess) {
-                TutorialActivity.finishedTutorial = true
-                startActivity(ProcessedActivity.intent(context))
-                activity?.finish()
-            } else {
-                TutorialActivity.binding.viewPagerTutorial.currentItem = 0
-            }
+            TutorialActivity.binding.viewPagerTutorial.currentItem++
         }
         binding.imageBtnContinueRecoveryText.setThrottledOnClickListener {
-            if (TutorialActivity.gotHealthAccess && TutorialActivity.gotLocationAccess) {
-                TutorialActivity.finishedTutorial = true
-                startActivity(ProcessedActivity.intent(context))
-                activity?.finish()
-            } else {
-                TutorialActivity.binding.viewPagerTutorial.currentItem = 0
-            }
+            TutorialActivity.binding.viewPagerTutorial.currentItem++
         }
     }
 }

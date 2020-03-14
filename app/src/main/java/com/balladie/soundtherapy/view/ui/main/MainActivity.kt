@@ -88,6 +88,9 @@ class MainActivity : BaseActivity() {
 
         private var playing: Boolean = true
         private var alarmOn: Boolean = false
+        private var pausedByPause: Boolean = false
+        private var enterInAlarm: Boolean = false
+        private var enterInSettings: Boolean = false
         private const val TIMER_INTENT_VALUE = 99
     }
 
@@ -114,6 +117,20 @@ class MainActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         setWindowFullScreen(window, actionBar)
+
+        when {
+            pausedByPause -> {
+                mediaPlayers[currentModeIdx].seekTo(mediaPlayers[currentModeIdx].currentPosition)
+                mediaPlayers[currentModeIdx].start()
+                pausedByPause = false
+            }
+            enterInAlarm -> {
+                enterInAlarm = false
+            }
+            enterInSettings -> {
+                enterInSettings = false
+            }
+        }
     }
 
     private fun getLinksFromExtra() {
@@ -297,11 +314,13 @@ class MainActivity : BaseActivity() {
                 binding.imageIconAlarmBg.animate().cancel()
                 binding.imageIconAlarmBg.alpha = 1.0f
             } else {
+                enterInAlarm = true
                 startActivityForResult(TimerActivity.intent(this), TIMER_INTENT_VALUE)
             }
         }
 
         binding.imageIconSettings.setThrottledOnClickListener {
+            enterInSettings = true
             startActivity(SettingsActivity.intent(this))
         }
     }
@@ -513,6 +532,17 @@ class MainActivity : BaseActivity() {
         })
 
         binding.imageIconAlarmBg.startAnimation(animFadeOut)
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        if (!enterInAlarm && !enterInSettings) {
+            if (playing) {
+                mediaPlayers[currentModeIdx].pause()
+                pausedByPause = true
+            }
+        }
     }
 
     override fun onDestroy() {

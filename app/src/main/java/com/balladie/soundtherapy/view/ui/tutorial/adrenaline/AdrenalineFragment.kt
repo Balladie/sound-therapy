@@ -16,9 +16,8 @@ import com.balladie.soundtherapy.R
 import com.balladie.soundtherapy.databinding.FragmentAdrenalineBinding
 import com.balladie.soundtherapy.view.setThrottledOnClickListener
 import com.balladie.soundtherapy.view.ui.base.BaseFragment
+import com.balladie.soundtherapy.view.ui.processed.ProcessedActivity
 import com.balladie.soundtherapy.view.ui.tutorial.TutorialActivity
-import java.util.*
-import kotlin.concurrent.schedule
 
 class AdrenalineFragment : BaseFragment() {
 
@@ -65,8 +64,10 @@ class AdrenalineFragment : BaseFragment() {
                 setAnimationListener(object: Animation.AnimationListener {
                     override fun onAnimationRepeat(p0: Animation) {}
                     override fun onAnimationEnd(p0: Animation) {
-                        if (TutorialActivity.gotLocationAccess) {
-                            TutorialActivity.binding.viewPagerTutorial.currentItem = 1
+                        if (TutorialActivity.gotHealthAccess && TutorialActivity.gotLocationAccess) {
+                            TutorialActivity.finishedTutorial = true
+                            startActivity(ProcessedActivity.intent(context))
+                            activity?.finish()
                         }
                     }
                     override fun onAnimationStart(p0: Animation) {}
@@ -82,7 +83,9 @@ class AdrenalineFragment : BaseFragment() {
                     override fun onAnimationRepeat(p0: Animation) {}
                     override fun onAnimationEnd(p0: Animation) {
                         if (TutorialActivity.gotHealthAccess && TutorialActivity.gotLocationAccess) {
-                            TutorialActivity.binding.viewPagerTutorial.currentItem = 1
+                            TutorialActivity.finishedTutorial = true
+                            startActivity(ProcessedActivity.intent(context))
+                            activity?.finish()
                         }
                     }
                     override fun onAnimationStart(p0: Animation) {}
@@ -108,8 +111,10 @@ class AdrenalineFragment : BaseFragment() {
                     override fun onAnimationRepeat(p0: Animation) {}
                     override fun onAnimationEnd(p0: Animation) {
                         TutorialActivity.gotHealthAccess = true
-                        if (TutorialActivity.gotHealthAccess && TutorialActivity.gotLocationAccess) {
-                            TutorialActivity.binding.viewPagerTutorial.currentItem++
+                        if (TutorialActivity.gotLocationAccess) {
+                            TutorialActivity.finishedTutorial = true
+                            startActivity(ProcessedActivity.intent(context))
+                            activity?.finish()
                         }
                     }
                     override fun onAnimationStart(p0: Animation) {}
@@ -134,8 +139,10 @@ class AdrenalineFragment : BaseFragment() {
                     override fun onAnimationRepeat(p0: Animation) {}
                     override fun onAnimationEnd(p0: Animation) {
                         TutorialActivity.gotHealthAccess = true
-                        if (TutorialActivity.gotHealthAccess && TutorialActivity.gotLocationAccess) {
-                            TutorialActivity.binding.viewPagerTutorial.currentItem++
+                        if (TutorialActivity.gotLocationAccess) {
+                            TutorialActivity.finishedTutorial = true
+                            startActivity(ProcessedActivity.intent(context))
+                            activity?.finish()
                         }
                     }
                     override fun onAnimationStart(p0: Animation) {}
@@ -180,8 +187,10 @@ class AdrenalineFragment : BaseFragment() {
                                 override fun onAnimationRepeat(p0: Animation) {}
                                 override fun onAnimationEnd(p0: Animation) {
                                     TutorialActivity.gotLocationAccess = true
-                                    if (TutorialActivity.gotHealthAccess && TutorialActivity.gotLocationAccess) {
-                                        TutorialActivity.binding.viewPagerTutorial.currentItem++
+                                    if (TutorialActivity.gotHealthAccess) {
+                                        TutorialActivity.finishedTutorial = true
+                                        startActivity(ProcessedActivity.intent(context))
+                                        activity?.finish()
                                     }
                                 }
                                 override fun onAnimationStart(p0: Animation) {}
