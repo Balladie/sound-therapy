@@ -15,6 +15,7 @@ import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.telephony.PhoneStateListener
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Animation
@@ -112,6 +113,7 @@ class MainActivity : BaseActivity() {
         initAllMediaPlayers()
         setupBtnListeners()
         setPlayOrPause()
+        startListeningOnCall()
     }
 
     override fun onResume() {
@@ -532,6 +534,11 @@ class MainActivity : BaseActivity() {
         })
 
         binding.imageIconAlarmBg.startAnimation(animFadeOut)
+    }
+
+    private fun startListeningOnCall() {
+        val phoneStateListener = PhoneStateListener() {
+        }
     }
 
     override fun onPause() {
